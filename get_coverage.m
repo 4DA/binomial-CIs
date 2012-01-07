@@ -1,0 +1,1 @@
+function p = get_coverage (pc, nc)
