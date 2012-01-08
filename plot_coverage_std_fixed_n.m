@@ -15,5 +15,6 @@ plot((1:N-1)/N,y);
 xlabel( 'trial probability' );
 ylabel( 'probability coverage' );
 grid on;
+title('Plot of probability coverage for std. CI')
 
 end
