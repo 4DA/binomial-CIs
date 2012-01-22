@@ -5,8 +5,9 @@ function plot_coverage_std(p, N)
 % p - probability
 % number of trials
 
+s = 15;    
 
-for n = 1:N
+for n = s:N
     y(n) = get_coverage_std(p,n);
 end
 
@@ -16,7 +17,7 @@ end
 
 % subplot(211);
 
-plot(1:N,y,1:N,0.95,'*');
+plot(s:N,y(s:N),s:N,0.95,'-');
 % plot(0.95);
 xlabel( 'number of trials' );
 ylabel( 'probability coverage' );

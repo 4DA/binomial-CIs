@@ -10,7 +10,7 @@ for p = 1:N-1
     y(p) = get_coverage_std(p/N,n);
 end
 
-plot((1:N-1)/N,y);
+plot((50:N-50)/N,y(50:N-50));
 
 xlabel( 'trial probability' );
 ylabel( 'probability coverage' );
