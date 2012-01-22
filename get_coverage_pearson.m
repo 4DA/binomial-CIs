@@ -4,5 +4,6 @@ function p = get_coverage_pearson (pc, nc)
 % pc  - sample probability 
 % nc  - number of trials
     [ph, ci] = binofit(nc.*pc, nc);
-    p = coverage_prob(ci(1), ci(2), pc, nc);
+    p = coverage_prob_model(ci(1), ci(2), pc, nc);
 end
+

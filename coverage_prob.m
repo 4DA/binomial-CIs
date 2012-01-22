@@ -5,16 +5,19 @@ function p = coverage_prob (cl, cu, pc, nc)
 % cu -  upper CI border
 % pc  - sample probability 
 % nc  - number of trials
-% Sz  - number of generated binomial numbers
-
-    Sz = 100000;
     
-    R = binornd(nc, pc, Sz, 1);
-    p = sum( ((R(:) ./ nc ) > cl) & ((R(:) ./ nc ) < cu) ) ./ Sz;
-    % p = sum (R) ./ 10000;
-    % p = R;
-    % p = R(:) ./ nc;
+    R = binopdf(0:nc, nc, pc);
+    % R
+    % sum(R)
+    p = 0;
+    for x=1:nc
+        if (x/nc > cl) & (x/nc < cu)
+            p = p + R(x);
+        end
+    end
 end
+
+% coverage_prob(0.6, 0.78, 0.7, 100)
 
 %%get converge probability                 
 %M = 10000;                              % 
