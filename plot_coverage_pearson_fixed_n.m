@@ -4,15 +4,17 @@ function plot_coverage_pearson_fixed_n(n)
 %% input:
 % n - number of trials 
 
-N = 1000;
+nt = 1000;
 
-for p = 1:N-1
-    y(p) = get_coverage_pearson(p/N,n);
+for p = 1:nt-1
+    y(p) = get_coverage_pearson_fixed_n(p/nt,n);
 end
 
-plot((1:N-1)/N,y);
+plot((1:nt-1)/nt,y);                      
+%plot((50:nt-50)/nt,y(50:nt-50));           
 
-xlabel( 'trial probability' );
+
+xlabel( 'observed trial probability' );
 ylabel( 'probability coverage' );
 grid on;
 title('Plot of probability coverage for pearson CI')

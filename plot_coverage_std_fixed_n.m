@@ -4,15 +4,16 @@ function plot_coverage_std_fixed_n(n)
 %% input:
 % n - number of trials 
 
-N = 1000;
+nt = 1000;
 
-for p = 1:N-1
-    y(p) = get_coverage_std(p/N,n);
+for p = 1:nt-1
+    y(p) = get_coverage_std(p/nt,n);
 end
 
-plot((50:N-50)/N,y(50:N-50));
+plot((50:nt-50)/nt,y(50:nt-50));           
+%plot((1:nt-1)/nt,y);
 
-xlabel( 'trial probability' );
+xlabel( 'observed trial probability' );
 ylabel( 'probability coverage' );
 grid on;
 title('Plot of probability coverage for std. CI')

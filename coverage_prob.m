@@ -7,12 +7,16 @@ function p = coverage_prob (cl, cu, pc, nc)
 % nc  - number of trials
     
     R = binopdf(0:nc, nc, pc);
-    % R
-    % sum(R)
     p = 0;
-    for x=1:nc
-        if (x/nc > cl) & (x/nc < cu)
-            p = p + R(x);
+    
+    % R
+    % cl
+    % cu
+    for x=0:nc                         
+        if ((x/nc >= cl) & (x/nc <= cu))
+            p = p + binopdf(x, nc, pc);
+            % x/nc
+            % p
         end
     end
 end

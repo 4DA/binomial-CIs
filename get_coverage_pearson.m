@@ -1,9 +1,10 @@
 function p = get_coverage_pearson (pc, nc)
 % get probability coverage of 95%-CI for given nc and pc
 %% input:
-% pc  - sample probability 
+% pc  - observed sample probability 
 % nc  - number of trials
-    [ph, ci] = binofit(nc.*pc, nc);
-    p = coverage_prob_model(ci(1), ci(2), pc, nc);
+    alpha = 0.05;
+    [ph, ci] = binofit(nc.*pc, nc, alpha);      
+    p = coverage_prob(ci(1), ci(2), pc, nc);
 end
 
