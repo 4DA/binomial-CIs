@@ -7,8 +7,10 @@ function plot_coverage_std(p, N)
 
 s = 15;    
 
+alpha = 0.05;
+
 for n = s:N
-    y(n) = get_coverage_std(p,n);
+    y(n) = get_coverage_std(p,n,alpha);
 end
 
 % for n = 1:N

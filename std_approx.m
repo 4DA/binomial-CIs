@@ -1,10 +1,10 @@
-function [x, y] = std_approx ( nc, pc )
+function [x, y] = std_approx ( nc, pc, alfa )
 %std_approx Standart distribution approximation of binomial dist CI (95 %)
 %% input:
 % nc = sample size 
 % pc = sample success probability
 
-    alfa = 0.05;
+    % alfa = 0.05;
     qc = 1.0 - pc;
 
     k = norminv(1 - alfa / 2);
@@ -18,8 +18,6 @@ function [x, y] = std_approx ( nc, pc )
     y = cu;
 
 end
-
-%%TODO: ask why 1/normcdf is worse than norminv!
 
 %% in R we have:
 % binom.confint(21, 35, 0.95, methods = "all")

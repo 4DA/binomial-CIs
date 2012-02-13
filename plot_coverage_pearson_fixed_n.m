@@ -5,9 +5,10 @@ function plot_coverage_pearson_fixed_n(n)
 % n - number of trials 
 
 nt = 1000;
+alpha = 0.05;
 
 for p = 1:nt-1
-    y(p) = get_coverage_pearson_fixed_n(p/nt,n);
+    y(p) = get_coverage_pearson_fixed_n(p/nt,n, alpha);
 end
 
 plot((1:nt-1)/nt,y);                      

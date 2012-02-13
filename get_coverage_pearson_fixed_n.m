@@ -1,12 +1,13 @@
-function p = get_coverage_pearson_fixed_n (pc, nc)
+function p = get_coverage_pearson_fixed_n (pc, nc, alpha)
 % get probability coverage of 95%-CI for given nc and pc
 %% input:
 % pc  - parameter p (probability)
 % nc  - number of trials
-    pc 
+% alpha - obv.
+
     persistent cis cus nnc;
     
-    alpha = 0.05;
+    % alpha = 0.05;
     
     if (isempty(nnc) | (nnc ~= nc))
         nnc = nc;

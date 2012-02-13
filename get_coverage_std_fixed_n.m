@@ -1,10 +1,11 @@
-function p = get_coverage_std_fixed_n (pc, nc)
+function p = get_coverage_std_fixed_n (pc, nc, alpha)
 % get probability coverage of 95%-CI for given nc and pc
 %% input:
 % pc  - parameter p (probability)
 % nc  - number of trials
+% alpha - obv.
+
     persistent cis cus nnc;
-    alpha = 0.05;
     
     if (isempty(nnc) | (nnc ~= nc))
         nnc = nc;
@@ -12,7 +13,7 @@ function p = get_coverage_std_fixed_n (pc, nc)
         cus=zeros(nc+1,1);
         
         for x=2:nc
-            [cl, cu] = std_approx(nc, x/nc);
+            [cl, cu] = std_approx(nc, x/nc, alpha);
             cis(x+1)=cl;
             cus(x+1)=cu;
         end

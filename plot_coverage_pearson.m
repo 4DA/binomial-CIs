@@ -4,9 +4,11 @@ function plot_coverage_pearson(p, N)
 %% input:
 % p - probability
 % number of trials
+    
+alpha = 0.05;
 
 for n = 1:N
-    z(n) = get_coverage_pearson(p,n);
+    z(n) = get_coverage_pearson(p,n,alpha);
 end
 
 plot(1:N,z,1:N,0.95,'*');
