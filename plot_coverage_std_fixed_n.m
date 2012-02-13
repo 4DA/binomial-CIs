@@ -7,7 +7,7 @@ function plot_coverage_std_fixed_n(n)
 nt = 1000;
 
 for p = 1:nt-1
-    y(p) = get_coverage_std(p/nt,n);
+    y(p) = get_coverage_std_fixed_n(p/nt,n);
 end
 
 plot((50:nt-50)/nt,y(50:nt-50));           
