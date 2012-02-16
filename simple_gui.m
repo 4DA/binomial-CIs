@@ -82,22 +82,24 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 
 prob = get(handles.prob_slider,'Value'); 
 trials = floor(get(handles.trials_slider,'Value')); 
+nt = str2num(get(handles.nt_edit, 'String'));
+alpha = str2num(get(handles.alpha_edit, 'String'));
 
 if (get(handles.fixed_prob_radio, 'Value') == get(handles.fixed_prob_radio, 'Max'))
     if (get(handles.standard_ci,'Value') == get(handles.standard_ci,'Max'))
-        plot_coverage_std_fixed_n(trials)
+        plot_coverage_std_fixed_n(trials,alpha,nt)
     end
     if (get(handles.cp_ci,'Value') == get(handles.cp_ci,'Max'))
-        plot_coverage_pearson_fixed_n(trials)
+        plot_coverage_pearson_fixed_n(trials,alpha,nt)
     end
 end
 
 if (get(handles.fixed_trials_radio, 'Value') == get(handles.fixed_trials_radio, 'Max'))
     if (get(handles.standard_ci,'Value') == get(handles.standard_ci,'Max'))
-        plot_coverage_std(prob,trials)
+        plot_coverage_std(prob,trials,alpha)
     end
     if (get(handles.cp_ci,'Value') == get(handles.cp_ci,'Max'))
-        plot_coverage_pearson(prob,trials)
+        plot_coverage_pearson(prob,trials,alpha)
     end
 end
 

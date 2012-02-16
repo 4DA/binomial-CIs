@@ -1,12 +1,12 @@
-function plot_coverage_std_fixed_n(n)
+function plot_coverage_std_fixed_n(n, alpha, nt)
 % plot the probability coverage of std. 95% CI for binomial for
 % fixed n
 %% input:
 % n - number of trials 
 
-nt = 1000;
+%nt = 1000;                              
 
-alpha = 0.05;
+%alpha = 0.05;
 
 for p = 1:nt-1
     y(p) = get_coverage_std_fixed_n(p/nt,n, alpha);
