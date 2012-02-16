@@ -83,12 +83,24 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 prob = get(handles.prob_slider,'Value'); 
 trials = floor(get(handles.trials_slider,'Value')); 
 
-if (get(handles.standard_ci,'Value') == get(handles.standard_ci,'Max'))
-    plot_coverage_std_fixed_n(trials)
+if (get(handles.fixed_prob_radio, 'Value') == get(handles.fixed_prob_radio, 'Max'))
+    if (get(handles.standard_ci,'Value') == get(handles.standard_ci,'Max'))
+        plot_coverage_std_fixed_n(trials)
+    end
+    if (get(handles.cp_ci,'Value') == get(handles.cp_ci,'Max'))
+        plot_coverage_pearson_fixed_n(trials)
+    end
 end
-if (get(handles.cp_ci,'Value') == get(handles.cp_ci,'Max'))
-    plot_coverage_pearson_fixed_n(trials)
+
+if (get(handles.fixed_trials_radio, 'Value') == get(handles.fixed_trials_radio, 'Max'))
+    if (get(handles.standard_ci,'Value') == get(handles.standard_ci,'Max'))
+        plot_coverage_std(prob,trials)
+    end
+    if (get(handles.cp_ci,'Value') == get(handles.cp_ci,'Max'))
+        plot_coverage_pearson(prob,trials)
+    end
 end
+
 
 % --- Executes on button press in pushbutton2.
 function pushbutton2_Callback(hObject, eventdata, handles)
@@ -165,7 +177,7 @@ end
 
 % --- Executes on slider movement.
 function trials_slider_Callback(hObject, eventdata, handles)
-set(handles.trials_text,'String', get(hObject, 'Value'));
+set(handles.trials_text,'String', floor(get(hObject, 'Value')));
 
 
 % hObject    handle to trials_slider (see GCBO)
