@@ -22,7 +22,7 @@ function varargout = simple_gui(varargin)
 
 % Edit the above text to modify the response to help simple_gui
 
-% Last Modified by GUIDE v2.5 16-Feb-2012 01:10:03
+% Last Modified by GUIDE v2.5 16-Feb-2012 23:24:54
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -78,14 +78,18 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-plot_coverage_pearson_fixed_n(100)
+%plot_coverage_pearson_fixed_n(100)
 
-%if isequal(interval_type, pearson_ci)
-%    plot_coverage_pearson_fixed_n(100)
-%end
-%if isequal(interval_type, standard_ci)
-%    plot_coverage_std_fixed_n(100)
-%end
+prob = get(handles.prob_slider,'Value'); 
+trials = floor(get(handles.trials_slider,'Value')); 
+
+if (get(handles.standard_ci,'Value') == get(handles.standard_ci,'Max'))
+    plot_coverage_std_fixed_n(trials)
+end
+if (get(handles.cp_ci,'Value') == get(handles.cp_ci,'Max'))
+    plot_coverage_pearson_fixed_n(trials)
+end
+
 % --- Executes on button press in pushbutton2.
 function pushbutton2_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton2 (see GCBO)
@@ -161,6 +165,9 @@ end
 
 % --- Executes on slider movement.
 function trials_slider_Callback(hObject, eventdata, handles)
+set(handles.trials_text,'String', get(hObject, 'Value'));
+
+
 % hObject    handle to trials_slider (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
@@ -182,18 +189,18 @@ end
 
 
 % --- Executes on slider movement.
-function slider1_Callback(hObject, eventdata, handles)
-% hObject    handle to slider1 (see GCBO)
+function prob_slider_Callback(hObject, eventdata, handles)
+% hObject    handle to prob_slider (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+set(handles.prob_text,'String', get(hObject, 'Value'));
 % Hints: get(hObject,'Value') returns position of slider
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
 
 
 % --- Executes during object creation, after setting all properties.
-function slider1_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to slider1 (see GCBO)
+function prob_slider_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to prob_slider (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -241,3 +248,26 @@ function pushbutton1_KeyPressFcn(hObject, eventdata, handles)
 %	Character: character interpretation of the key(s) that was pressed
 %	Modifier: name(s) of the modifier key(s) (i.e., control, shift) pressed
 % handles    structure with handles and user data (see GUIDATA)
+
+
+
+function nt_edit_Callback(hObject, eventdata, handles)
+% hObject    handle to nt_edit (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of nt_edit as text
+%        str2double(get(hObject,'String')) returns contents of nt_edit as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function nt_edit_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to nt_edit (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
