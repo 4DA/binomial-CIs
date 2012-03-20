@@ -22,7 +22,7 @@ function varargout = simple_gui(varargin)
 
 % Edit the above text to modify the response to help simple_gui
 
-% Last Modified by GUIDE v2.5 16-Feb-2012 23:24:54
+% Last Modified by GUIDE v2.5 20-Mar-2012 09:38:56
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -84,6 +84,8 @@ prob = get(handles.prob_slider,'Value');
 trials = floor(get(handles.trials_slider,'Value')); 
 nt = str2num(get(handles.nt_edit, 'String'));
 alpha = str2num(get(handles.alpha_edit, 'String'));
+
+axes(handles.axes1);
 
 if (get(handles.fixed_prob_radio, 'Value') == get(handles.fixed_prob_radio, 'Max'))
     if (get(handles.standard_ci,'Value') == get(handles.standard_ci,'Max'))
@@ -284,4 +286,50 @@ function nt_edit_CreateFcn(hObject, eventdata, handles)
 %       See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on button press in calc_cis_button.
+function calc_cis_button_Callback(hObject, eventdata, handles)
+% hObject    handle to calc_cis_button (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+persistent cis cus nnc nalpha;
+
+trials = floor(get(handles.trials_slider,'Value')); 
+alpha = str2num(get(handles.alpha_edit, 'String'));
+
+need_recomp = false;
+
+%if (isempty(nnc) | isempty(nalpha) | (nnc ~= nc) | (nalpha ~= alpha))
+%    need_recomp = true;
+%end
+
+axes(handles.axes2);
+
+if (get(handles.fixed_prob_radio, 'Value') == get(handles.fixed_prob_radio, 'Max'))
+    if (get(handles.standard_ci,'Value') == get(handles.standard_ci,'Max'))
+        [cls cus] = get_cis_std(trials, alpha);
+        nnc = trials;
+        nalpha = alpha;
+        cla;
+        plot_cis(cls, cus);
+    end
+    if (get(handles.cp_ci,'Value') == get(handles.cp_ci,'Max'))
+        [cls cus] = get_cis_pearson(trials, alpha);
+        nnc = trials;
+        nalpha = alpha;
+        cla;
+        plot_cis(cls, cus);
+    end
+end
+
+if (get(handles.fixed_trials_radio, 'Value') == get(handles.fixed_trials_radio, 'Max'))
+    if (get(handles.standard_ci,'Value') == get(handles.standard_ci,'Max'))
+        %plot_coverage_std(prob,trials,alpha)
+    end
+    if (get(handles.cp_ci,'Value') == get(handles.cp_ci,'Max'))
+        %plot_coverage_pearson(prob,trials,alpha)
+    end
 end
