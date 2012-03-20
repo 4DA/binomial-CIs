@@ -22,7 +22,7 @@ function varargout = simple_gui(varargin)
 
 % Edit the above text to modify the response to help simple_gui
 
-% Last Modified by GUIDE v2.5 20-Mar-2012 09:38:56
+% Last Modified by GUIDE v2.5 20-Mar-2012 10:01:46
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -332,4 +332,146 @@ if (get(handles.fixed_trials_radio, 'Value') == get(handles.fixed_trials_radio, 
     if (get(handles.cp_ci,'Value') == get(handles.cp_ci,'Max'))
         %plot_coverage_pearson(prob,trials,alpha)
     end
+end
+
+
+% --- Executes on slider movement.
+function shift_from_slider_Callback(hObject, eventdata, handles)
+% hObject    handle to shift_from_slider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+
+
+% --- Executes during object creation, after setting all properties.
+function shift_from_slider_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to shift_from_slider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: slider controls usually have a light gray background.
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+
+
+% --- Executes on slider movement.
+function shitf_by_slider_Callback(hObject, eventdata, handles)
+% hObject    handle to shitf_by_slider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+
+
+% --- Executes during object creation, after setting all properties.
+function shitf_by_slider_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to shitf_by_slider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: slider controls usually have a light gray background.
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+
+
+% --- Executes on slider movement.
+function shift_to_slider_Callback(hObject, eventdata, handles)
+% hObject    handle to shift_to_slider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'Value') returns position of slider
+%        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
+
+
+% --- Executes during object creation, after setting all properties.
+function shift_to_slider_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to shift_to_slider (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: slider controls usually have a light gray background.
+if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor',[.9 .9 .9]);
+end
+
+
+% --- Executes on button press in shift_button.
+function shift_button_Callback(hObject, eventdata, handles)
+% hObject    handle to shift_button (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+
+function shift_by_edit_Callback(hObject, eventdata, handles)
+% hObject    handle to shift_by_edit (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of shift_by_edit as text
+%        str2double(get(hObject,'String')) returns contents of shift_by_edit as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function shift_by_edit_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to shift_by_edit (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function shift_from_edit_Callback(hObject, eventdata, handles)
+% hObject    handle to shift_from_edit (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of shift_from_edit as text
+%        str2double(get(hObject,'String')) returns contents of shift_from_edit as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function shift_from_edit_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to shift_from_edit (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function shift_to_edit_Callback(hObject, eventdata, handles)
+% hObject    handle to shift_to_edit (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of shift_to_edit as text
+%        str2double(get(hObject,'String')) returns contents of shift_to_edit as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function shift_to_edit_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to shift_to_edit (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
 end
