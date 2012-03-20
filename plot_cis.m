@@ -8,9 +8,9 @@ function plot_cis(cls, cus)
 %alpha = 0.05;
 %cla;    
 plot(cls);
-%hold on;
+hold on;
 plot(cus);
-%hold off;
+hold off;
 
 %plot((50:nt-50)/nt,y(50:nt-50));           
 
