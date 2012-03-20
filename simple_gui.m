@@ -22,7 +22,7 @@ function varargout = simple_gui(varargin)
 
 % Edit the above text to modify the response to help simple_gui
 
-% Last Modified by GUIDE v2.5 20-Mar-2012 10:01:46
+% Last Modified by GUIDE v2.5 21-Mar-2012 01:02:40
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -79,7 +79,7 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 %plot_coverage_pearson_fixed_n(100)
-
+global cls cus;
 prob = get(handles.prob_slider,'Value'); 
 trials = floor(get(handles.trials_slider,'Value')); 
 nt = str2num(get(handles.nt_edit, 'String'));
@@ -89,10 +89,10 @@ axes(handles.axes1);
 
 if (get(handles.fixed_prob_radio, 'Value') == get(handles.fixed_prob_radio, 'Max'))
     if (get(handles.standard_ci,'Value') == get(handles.standard_ci,'Max'))
-        plot_coverage_std_fixed_n(trials,alpha,nt)
+        plot_coverage_std_fixed_n_cis(trials,nt,cls,cus)
     end
     if (get(handles.cp_ci,'Value') == get(handles.cp_ci,'Max'))
-        plot_coverage_pearson_fixed_n(trials,alpha,nt)
+        plot_coverage_pearson_fixed_n_cis(trials,nt,cls,cus)
     end
 end
 
@@ -295,12 +295,12 @@ function calc_cis_button_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-persistent cis cus nnc nalpha;
+global cls cus nnc nalpha;
 
 trials = floor(get(handles.trials_slider,'Value')); 
 alpha = str2num(get(handles.alpha_edit, 'String'));
 
-need_recomp = false;
+%need_recomp = false;
 
 %if (isempty(nnc) | isempty(nalpha) | (nnc ~= nc) | (nalpha ~= alpha))
 %    need_recomp = true;
@@ -340,7 +340,7 @@ function shift_from_slider_Callback(hObject, eventdata, handles)
 % hObject    handle to shift_from_slider (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+set(handles.shift_from_edit,'String', floor(get(hObject, 'Value')));
 % Hints: get(hObject,'Value') returns position of slider
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
 
@@ -358,18 +358,19 @@ end
 
 
 % --- Executes on slider movement.
-function shitf_by_slider_Callback(hObject, eventdata, handles)
-% hObject    handle to shitf_by_slider (see GCBO)
+function shift_by_slider_Callback(hObject, eventdata, handles)
+% hObject    handle to shift_by_slider (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
+set(handles.shift_by_edit,'String', get(hObject, 'Value'));
 % Hints: get(hObject,'Value') returns position of slider
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
 
 
 % --- Executes during object creation, after setting all properties.
-function shitf_by_slider_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to shitf_by_slider (see GCBO)
+function shift_by_slider_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to shift_by_slider (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -384,7 +385,7 @@ function shift_to_slider_Callback(hObject, eventdata, handles)
 % hObject    handle to shift_to_slider (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-
+set(handles.shift_to_edit,'String', round(get(hObject, 'Value')));
 % Hints: get(hObject,'Value') returns position of slider
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
 
@@ -406,7 +407,28 @@ function shift_button_Callback(hObject, eventdata, handles)
 % hObject    handle to shift_button (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+global cls cus;
 
+shift_val = get(handles.shift_by_slider,'Value');
+shift_from = get(handles.shift_from_slider,'Value');
+shift_to = get(handles.shift_to_slider,'Value');
+
+for x=shift_from:1:shift_to
+    x = round(x);
+    cls(x) = cls(x) + shift_val;
+    if (cls(x) > 1.0)
+        cls(x) = 1.0;
+    end
+    
+    cus(x) = cus(x) + shift_val;
+    if (cus(x) > 1.0)
+        cus(x) = 1.0;
+    end
+end
+
+axes(handles.axes2);
+plot_cis(cls,cus);
+    
 
 
 function shift_by_edit_Callback(hObject, eventdata, handles)
