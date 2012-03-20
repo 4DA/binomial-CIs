@@ -1,12 +1,12 @@
-function [cls, cus] = get_cis_pearson(n, nt, alpha)
+function [cls, cus] = get_cis_pearson(n, alpha)
 % get std confidence interval
 %% input:
 % n - number of trials
 % nt - discretization
 % alpha - alpha
 
-cis=zeros(nt+1,1);
-cus=zeros(nt+1,1);
+cis=zeros(n+1,1);
+cus=zeros(n+1,1);
         
 for x=0:n
     [phat,pci] = binofit(x,n,alpha);
