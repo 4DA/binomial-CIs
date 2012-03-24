@@ -22,7 +22,7 @@ function varargout = simple_gui(varargin)
 
 % Edit the above text to modify the response to help simple_gui
 
-% Last Modified by GUIDE v2.5 24-Mar-2012 20:37:40
+% Last Modified by GUIDE v2.5 24-Mar-2012 20:56:00
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -413,6 +413,10 @@ shift_val = get(handles.shift_by_slider,'Value');
 shift_from = get(handles.shift_from_slider,'Value');
 shift_to = get(handles.shift_to_slider,'Value');
 
+if (shift_to < shift_from)
+    h = msgbox('From must not exceed To!','Intervals error','Error', 'Modal');
+end
+
 for x=shift_from:1:shift_to
     x = round(x);
     cls(x) = cls(x) + shift_val;
@@ -507,7 +511,7 @@ function ci_number_slider_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'Value') returns position of slider
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
-
+set(handles.ci_number_edit,'String', floor(get(hObject, 'Value')));
 
 % --- Executes during object creation, after setting all properties.
 function ci_number_slider_CreateFcn(hObject, eventdata, handles)
@@ -549,7 +553,22 @@ function setci_button_Callback(hObject, eventdata, handles)
 % hObject    handle to setci_button (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+global cls cus;
 
+cin = floor(get(handles.ci_number_slider,'Value'));
+left_limit = get(handles.left_limit_slider,'Value');
+right_limit = get(handles.right_limit_slider,'Value');
+
+if (left_limit > right_limit)
+    h = msgbox('Left must not exceed the right!','Limits error','Error', 'Modal');
+end
+
+
+cls(cin) = left_limit;
+cus(cin) = right_limit;
+
+axes(handles.axes2);
+plot_cis(cls,cus);
 
 % --- Executes on slider movement.
 function left_limit_slider_Callback(hObject, eventdata, handles)
@@ -559,7 +578,7 @@ function left_limit_slider_Callback(hObject, eventdata, handles)
 
 % Hints: get(hObject,'Value') returns position of slider
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
-
+set(handles.left_limit_edit,'String', get(hObject, 'Value'));
 
 % --- Executes during object creation, after setting all properties.
 function left_limit_slider_CreateFcn(hObject, eventdata, handles)
@@ -597,18 +616,18 @@ end
 
 
 % --- Executes on slider movement.
-function slider14_Callback(hObject, eventdata, handles)
-% hObject    handle to slider14 (see GCBO)
+function right_limit_slider_Callback(hObject, eventdata, handles)
+% hObject    handle to right_limit_slider (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hints: get(hObject,'Value') returns position of slider
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
-
+set(handles.right_limit_edit,'String', get(hObject, 'Value'));
 
 % --- Executes during object creation, after setting all properties.
-function slider14_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to slider14 (see GCBO)
+function right_limit_slider_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to right_limit_slider (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
