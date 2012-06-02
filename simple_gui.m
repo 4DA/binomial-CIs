@@ -87,7 +87,7 @@ alpha = str2num(get(handles.alpha_edit, 'String'));
 
 axes(handles.axes1);
 
-if (get(handles.fixed_prob_radio, 'Value') == get(handles.fixed_prob_radio, 'Max'))
+if (get(handles.fixed_trials_radio, 'Value') == get(handles.fixed_trials_radio, 'Max'))
     if (get(handles.standard_ci,'Value') == get(handles.standard_ci,'Max'))
         plot_coverage_std_fixed_n_cis(trials,nt,cls,cus)
     end
@@ -96,7 +96,8 @@ if (get(handles.fixed_prob_radio, 'Value') == get(handles.fixed_prob_radio, 'Max
     end
 end
 
-if (get(handles.fixed_trials_radio, 'Value') == get(handles.fixed_trials_radio, 'Max'))
+
+if (get(handles.fixed_prob_radio, 'Value') == get(handles.fixed_prob_radio, 'Max'))
     if (get(handles.standard_ci,'Value') == get(handles.standard_ci,'Max'))
         plot_coverage_std(prob,trials,alpha)
     end
@@ -308,7 +309,7 @@ alpha = str2num(get(handles.alpha_edit, 'String'));
 
 axes(handles.axes2);
 
-if (get(handles.fixed_prob_radio, 'Value') == get(handles.fixed_prob_radio, 'Max'))
+if (get(handles.fixed_trials_radio, 'Value') == get(handles.fixed_trials_radio, 'Max'))
     if (get(handles.standard_ci,'Value') == get(handles.standard_ci,'Max'))
         [cls cus] = get_cis_std(trials, alpha);
         nnc = trials;
@@ -325,7 +326,7 @@ if (get(handles.fixed_prob_radio, 'Value') == get(handles.fixed_prob_radio, 'Max
     end
 end
 
-if (get(handles.fixed_trials_radio, 'Value') == get(handles.fixed_trials_radio, 'Max'))
+if (get(handles.fixed_prob_radio, 'Value') == get(handles.fixed_prob_radio, 'Max'))
     if (get(handles.standard_ci,'Value') == get(handles.standard_ci,'Max'))
         %plot_coverage_std(prob,trials,alpha)
     end
