@@ -10,14 +10,16 @@ function [x, y] = stern_crow ( nc, pc, alfa )
     gm = 1.0 - alfa; % gamma
     
     ileft = 0;
-    iright = 0;
+    iright = nc+1;
     minlen = nc+1;
     
-    P = binopdf(0:nc, nc, pc);
+    P = binopdf(0:nc, nc, pc)
+    
+    sum(P(90:101))
    
-    for l=1:nc-1
+    for l=0:nc-1
         for r = l:nc
-            if (sum(P(l:r)) > gm && r-l < minlen)
+            if (sum(P(l+1:r+1)) > gm && r-l < minlen)
                 ileft = l;
                 iright = r;
                 minlen = r-l;
