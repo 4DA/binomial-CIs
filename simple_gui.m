@@ -94,6 +94,9 @@ if (get(handles.fixed_trials_radio, 'Value') == get(handles.fixed_trials_radio, 
     if (get(handles.cp_ci,'Value') == get(handles.cp_ci,'Max'))
         plot_coverage_pearson_fixed_n_cis(trials,nt,cls,cus)
     end
+    if (get(handles.sc_ci,'Value') == get(handles.sc_ci,'Max'))
+        plot_coverage_stern_crow_fixed_n_cis(trials,nt,cls,cus)
+    end
 end
 
 
@@ -319,6 +322,13 @@ if (get(handles.fixed_trials_radio, 'Value') == get(handles.fixed_trials_radio, 
     end
     if (get(handles.cp_ci,'Value') == get(handles.cp_ci,'Max'))
         [cls cus] = get_cis_pearson(trials, alpha);
+        nnc = trials;
+        nalpha = alpha;
+        cla;
+        plot_cis(cls, cus);
+    end
+    if (get(handles.sc_ci,'Value') == get(handles.sc_ci,'Max'))
+        [cls cus] = get_cis_stern_crow(trials, alpha);
         nnc = trials;
         nalpha = alpha;
         cla;
